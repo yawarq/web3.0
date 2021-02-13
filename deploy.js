@@ -23,5 +23,4 @@ const deploy = async ()=>{
     // 0x7A2ee58ca73bFde6De1c86FE8B352058b94D93da
 
 }
-
 deploy();
