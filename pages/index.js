@@ -26,7 +26,7 @@ class Lottery extends Component {
     }
 
     onSubmit = async (event)=>{
-       event.preventDefault();
+       event.preventDefault();//event occurs when you submit
        const accounts = await web3.eth.getAccounts();
 
        if(this.state.participate_amount<0.01){
@@ -40,7 +40,14 @@ class Lottery extends Component {
        this.setState({message: 'You have been added to the Lottery'});
     }
 
-
+    onClick = async ()=>{
+      this.setState({message:'Please wait...'})
+      const accounts = await web3.eth.getAccounts();
+      const winner = await lottery.methods.pickWinner().send({
+          from: accounts[0]
+      });
+      this.setState({message:'Payment sent to Winner'});
+   }
 
     render() {
         return (
@@ -56,7 +63,7 @@ class Lottery extends Component {
                 <p>{this.state.message}</p>
                 <hr /> <br /> <hr />
                 <p>The manager of the lottery decentralised app is {this.state.manager}</p>
-                <button>Pick Winner</button>
+                <button onClick={this.onClick}>Pick Winner</button>
             </div>
         )
     }
